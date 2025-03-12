@@ -54,3 +54,72 @@ This project is a Flood Monitoring System that retrieves and displays comprehens
    ```bash
    git clone <repository-url>
    cd water-monitoring-project/backend
+
+2. **Create and Activate a Virtual Environment:**
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate  # On Windows: venv\Scripts\activate
+   
+3. **Install Dependencies:** 
+    ```nginx
+    Flask
+    Flask-Caching
+    requests
+Then run:
+    ```bash
+    pip install -r requirements.txt
+    
+4. **Run the Backend Service:**
+    ```bash
+    python server.py
+The backend will be available at http://127.0.0.1:5000/.
+
+### Frontend Setup
+Navigate to the Frontend Folder:
+    ```bash
+    cd ../frontend
+Install Dependencies:
+    ```bash
+    npm install
+Start the Frontend Development Server:
+    ```bash
+    npm run dev
+The frontend will be available at http://localhost:5173/.
+
+### Usage
+#### Station List Page:
+The homepage displays a list of monitoring stations with a search field and grouping options (by river name). Users can filter the stations using the search box. Clicking on a station navigates to its detail page.
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/4d26c534-0a8c-4672-b263-82d43c0e6d6f" />
+
+
+#### Station Detail Page:
+The detail page shows the station's comprehensive information (name, town, river, date opened, status, etc.) along with:
+
+A toggle to switch between 24-hour and 7-day historical reading data.
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/234f7fc2-457a-46f9-9613-03ca35f3d97e" />
+<img width="1156" alt="image" src="https://github.com/user-attachments/assets/194d15ce-d878-49ae-a219-b540741d61df" />
+
+A line chart displaying historical water level readings.
+![1741748830743](https://github.com/user-attachments/assets/a322ebe8-4520-4080-b000-d332e186dc88)
+
+A data table listing the historical readings with formatted date/time and water level values.
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/de95ca21-c9c0-4f4d-97cc-2993b71410ef" />
+
+### Future Improvements
+Enhanced Filtering: Add additional filters (e.g., by town or status) to further improve the station search functionality.
+UI Enhancements: Refine the user interface with improved layout, spacing, and responsive design.
+Error Handling: Implement more robust error handling and user feedback for failed API calls.
+Additional Visualizations: Consider adding further data visualizations and statistical summaries.
+
+### Running the Application
+After installation, run both the backend and frontend services. The frontend communicates with the backend via a proxy (configured in vite.config.js), so ensure both are running:
+
+Backend: http://127.0.0.1:5000/
+Frontend: http://localhost:5173/
+
+### Contributing
+Contributions and improvements are welcome. Please fork the repository and create a pull request with your changes.
+
+### License
+This project is licensed under the Open Government Licence v3.0.
+
