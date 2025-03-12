@@ -106,10 +106,15 @@ A data table listing the historical readings with formatted date/time and water 
 <img width="1440" alt="image" src="https://github.com/user-attachments/assets/de95ca21-c9c0-4f4d-97cc-2993b71410ef" />
 
 ### Future Improvements
-Enhanced Filtering: Add additional filters (e.g., by town or status) to further improve the station search functionality.
-UI Enhancements: Refine the user interface with improved layout, spacing, and responsive design.
-Error Handling: Implement more robust error handling and user feedback for failed API calls.
-Additional Visualizations: Consider adding further data visualizations and statistical summaries.
+- **Map Functionality**: Reintroduce and enhance map features, such as:
+  - Displaying interactive station markers on a map.
+  - Pop-up details for each station when a marker is clicked.
+  - Clustering of markers in densely populated areas.
+  - Optional integration of a terrain view to provide context, especially for flood risk assessment.
+- **Enhanced Filtering**: Add additional filters (e.g., by town or status) to further improve the station search functionality.
+- **UI Enhancements**: Refine the user interface with improved layout, spacing, and responsive design.
+- **Error Handling**: Implement more robust error handling and user feedback for failed API calls.
+
 
 ### Running the Application
 After installation, run both the backend and frontend services. The frontend communicates with the backend via a proxy (configured in vite.config.js), so ensure both are running:
