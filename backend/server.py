@@ -5,7 +5,7 @@ from flask_caching import Cache
 
 app = Flask(__name__)
 app.config['CACHE_TYPE'] = 'SimpleCache'
-app.config['CACHE_DEFAULT_TIMEOUT'] = 900  # 15 分钟缓存
+app.config['CACHE_DEFAULT_TIMEOUT'] = 900  # 15 minutes cache
 cache = Cache(app)
 
 API_BASE = "https://environment.data.gov.uk/flood-monitoring"
@@ -21,15 +21,15 @@ def index():
         station_items = stations_json.get("items", [])
     except Exception as e:
         station_items = []
-        error_message = f"获取监测站列表失败：{str(e)}"
+        error_message = f"Failed to retrieve station list: {str(e)}"
 
-    # 提取所有需要的字段
+    # Extract all required fields
     stations = []
     for item in station_items:
         station_ref = item.get("stationReference")
         if station_ref:
             stations.append({
-                "label": item.get("label", "无名称"),
+                "label": item.get("label", "No Name"),
                 "stationReference": station_ref,
                 "town": item.get("town", ""),
                 "riverName": item.get("riverName", ""),
@@ -52,10 +52,10 @@ def index():
 
     html_template = """
     <!doctype html>
-    <html lang="zh">
+    <html lang="en">
     <head>
       <meta charset="UTF-8">
-      <title>监测站列表 - 后端测试</title>
+      <title>Station List - Backend Test</title>
       <style>
         body { font-family: Arial, sans-serif; padding: 20px; }
         .station { margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #ccc; }
@@ -63,38 +63,38 @@ def index():
       </style>
     </head>
     <body>
-      <h1>监测站列表</h1>
+      <h1>Station List</h1>
       {% if error_message %}
         <p style="color:red;">{{ error_message }}</p>
       {% endif %}
       {% for station in stations %}
         <div class="station">
-          <div class="field"><strong>名称：</strong> {{ station.label }}</div>
-          <div class="field"><strong>站点标识：</strong> {{ station.stationReference }}</div>
-          <div class="field"><strong>城市：</strong> {{ station.town }}</div>
-          <div class="field"><strong>河流：</strong> {{ station.riverName }}</div>
-          <div class="field"><strong>开站日期：</strong> {{ station.dateOpened }}</div>
-          <div class="field"><strong>状态：</strong> {{ station.status }}</div>
-          <div class="field"><strong>RLOIid：</strong> {{ station.RLOIid }}</div>
-          <div class="field"><strong>notation：</strong> {{ station.notation }}</div>
-          <div class="field"><strong>wiskiID：</strong> {{ station.wiskiID }}</div>
-          <div class="field"><strong>经纬度：</strong> {{ station.lat }}, {{ station.long }}</div>
-          <div class="field"><strong>英国网格坐标：</strong> Easting: {{ station.easting }}, Northing: {{ station.northing }}</div>
-          <div class="field"><strong>集水区：</strong> {{ station.catchmentName }}</div>
-          <div class="field"><strong>测量指标：</strong>
+          <div class="field"><strong>Name:</strong> {{ station.label }}</div>
+          <div class="field"><strong>Station Reference:</strong> {{ station.stationReference }}</div>
+          <div class="field"><strong>City:</strong> {{ station.town }}</div>
+          <div class="field"><strong>River:</strong> {{ station.riverName }}</div>
+          <div class="field"><strong>Date Opened:</strong> {{ station.dateOpened }}</div>
+          <div class="field"><strong>Status:</strong> {{ station.status }}</div>
+          <div class="field"><strong>RLOIid:</strong> {{ station.RLOIid }}</div>
+          <div class="field"><strong>Notation:</strong> {{ station.notation }}</div>
+          <div class="field"><strong>wiskiID:</strong> {{ station.wiskiID }}</div>
+          <div class="field"><strong>Coordinates:</strong> {{ station.lat }}, {{ station.long }}</div>
+          <div class="field"><strong>Grid Coordinates:</strong> Easting: {{ station.easting }}, Northing: {{ station.northing }}</div>
+          <div class="field"><strong>Catchment:</strong> {{ station.catchmentName }}</div>
+          <div class="field"><strong>Measurement Indicators:</strong>
             <ul>
               {% for measure in station.measures %}
                 <li>
-                  {{ measure.parameterName }} ({{ measure.parameter }}) - 周期: {{ measure.period }} 秒,
-                  修饰: {{ measure.qualifier }}, 单位: {{ measure.unitName }}
+                  {{ measure.parameterName }} ({{ measure.parameter }}) - Period: {{ measure.period }} seconds,
+                  Qualifier: {{ measure.qualifier }}, Unit: {{ measure.unitName }}
                 </li>
               {% endfor %}
             </ul>
           </div>
-          <div class="field"><strong>阶段量程：</strong> {{ station.stageScale }}</div>
-          <div class="field"><strong>下游量程：</strong> {{ station.downstageScale }}</div>
-          <div class="field"><strong>状态原因：</strong> {{ station.statusReason }}</div>
-          <div class="field"><strong>状态更新时间：</strong> {{ station.statusDate }}</div>
+          <div class="field"><strong>Stage Scale:</strong> {{ station.stageScale }}</div>
+          <div class="field"><strong>Downstage Scale:</strong> {{ station.downstageScale }}</div>
+          <div class="field"><strong>Status Reason:</strong> {{ station.statusReason }}</div>
+          <div class="field"><strong>Status Update:</strong> {{ station.statusDate }}</div>
         </div>
       {% endfor %}
     </body>
