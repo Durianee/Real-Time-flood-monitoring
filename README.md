@@ -89,6 +89,7 @@ The frontend will be available at http://localhost:5173/.
 ### Usage
 #### Station List Page:
 The homepage displays a list of monitoring stations with a search field and grouping options (by river name). Users can filter the stations using the search box. Clicking on a station navigates to its detail page.
+<img width="1440" alt="image" src="https://github.com/user-attachments/assets/db4852f0-0211-4693-a970-e09a0b14f531" />
 <img width="1440" alt="image" src="https://github.com/user-attachments/assets/4d26c534-0a8c-4672-b263-82d43c0e6d6f" />
 
 
