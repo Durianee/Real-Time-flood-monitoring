@@ -1,34 +1,34 @@
 <template>
   <v-container fluid>
-    <v-btn text @click="$router.push('/')">返回列表</v-btn>
+    <v-btn text @click="$router.push('/')">Back to List</v-btn>
     <v-card class="mb-4" outlined v-if="station && station.label">
       <v-card-title>{{ station.label }} ({{ station.riverName }})</v-card-title>
       <v-card-text>
-        <div><strong>城市：</strong> {{ station.town }}</div>
-        <div><strong>开站日期：</strong> {{ station.dateOpened }}</div>
-        <div><strong>状态：</strong> {{ station.status }}</div>
-        <div><strong>集水区：</strong> {{ station.catchmentName }}</div>
-        <div><strong>经纬度：</strong> {{ station.lat }}, {{ station.long }}</div>
+        <div><strong>City:</strong> {{ station.town }}</div>
+        <div><strong>Date Opened:</strong> {{ station.dateOpened }}</div>
+        <div><strong>Status:</strong> {{ station.status }}</div>
+        <div><strong>Catchment:</strong> {{ station.catchmentName }}</div>
+        <div><strong>Coordinates:</strong> {{ station.lat }}, {{ station.long }}</div>
       </v-card-text>
     </v-card>
 
-    <!-- 时间范围切换按钮（仅支持 24h 和 7d） -->
+    <!-- Time range toggle (supports 24h and 7d) -->
     <v-btn-toggle v-model="period" color="primary" class="mb-4" mandatory>
-      <v-btn value="24h">24小时</v-btn>
-      <v-btn value="7d">7天</v-btn>
+      <v-btn value="24h">24h</v-btn>
+      <v-btn value="7d">7d</v-btn>
     </v-btn-toggle>
 
-    <!-- 折线图区域 -->
+    <!-- Line chart section -->
     <v-card v-if="readings && readings.length > 0" outlined class="mb-4 pa-4">
       <canvas ref="chartCanvas"></canvas>
     </v-card>
     <v-alert v-else type="info" elevation="2">
-      暂无历史读数数据
+      No historical readings data available
     </v-alert>
 
-    <!-- 历史读数数据表 -->
+    <!-- Historical readings data table -->
     <v-card v-if="readings && readings.length > 0" outlined>
-      <v-card-title>历史读数数据</v-card-title>
+      <v-card-title>Historical Readings Data</v-card-title>
       <v-data-table :items="readings" :headers="tableHeaders" :items-per-page="10" class="elevation-1" dense>
         <template v-slot:item.dateTime="{ item }">
           {{ formatDate(item.dateTime) }}
@@ -40,7 +40,7 @@
       </v-data-table>
     </v-card>
 
-    <!-- 加载指示器 -->
+    <!-- Loading indicator -->
     <v-container v-if="!station || !station.label" class="text-center">
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
     </v-container>
@@ -59,11 +59,11 @@ export default {
     return {
       station: {},
       readings: [],
-      period: '24h',  // 默认选择 24 小时
+      period: '24h', // Default is 24h
       chart: null,
       tableHeaders: [
-        { text: '时间', value: 'dateTime', sortable: true },
-        { text: '水位', value: 'value', sortable: true }
+        { text: 'Time', value: 'dateTime', sortable: true },
+        { text: 'Water Level', value: 'value', sortable: true }
       ]
     }
   },
@@ -82,14 +82,14 @@ export default {
         if (this.$refs.chartCanvas) {
           this.updateChart();
         } else {
-          console.warn("chartCanvas 未渲染！");
+          console.warn("chartCanvas not rendered!");
         }
       });
     }
   },
   methods: {
     fetchStationData() {
-      // 获取站点详细信息
+      // Fetch station details
       this.$axios.get(`/api/station/${this.id}`)
         .then(res => {
           console.log("Station detail response:", res.data);
@@ -103,7 +103,7 @@ export default {
           console.error("Error fetching station detail:", err);
         });
       
-      // 获取历史读数数据
+      // Fetch historical readings data
       this.$axios.get(`/api/readings/${this.id}?period=${this.period}`)
         .then(res => {
           console.log("Readings response:", res.data);
@@ -115,7 +115,7 @@ export default {
     },
     updateChart() {
       if (!this.$refs.chartCanvas) {
-        console.error("chartCanvas 未找到");
+        console.error("chartCanvas not found");
         return;
       }
       if (this.chart) {
@@ -131,7 +131,7 @@ export default {
         data: {
           labels,
           datasets: [{
-            label: '水位值',
+            label: 'Water Level',
             data: values,
             fill: false,
             borderColor: '#1976D2',
@@ -141,8 +141,8 @@ export default {
         },
         options: {
           scales: {
-            x: { display: true, title: { display: true, text: '时间' } },
-            y: { display: true, title: { display: true, text: `水位 (${this.station.measures && this.station.measures.length > 0 ? this.station.measures[0].unitName : 'm'})` } }
+            x: { display: true, title: { display: true, text: 'Time' } },
+            y: { display: true, title: { display: true, text: `Water Level (${this.station.measures && this.station.measures.length > 0 ? this.station.measures[0].unitName : 'm'})` } }
           },
           plugins: {
             tooltip: { mode: 'nearest' },
@@ -169,6 +169,4 @@ export default {
 };
 </script>
 
-<style scoped>
-/* 根据需要添加样式 */
-</style>
+

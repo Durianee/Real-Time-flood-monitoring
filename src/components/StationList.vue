@@ -1,12 +1,12 @@
 <template>
   <v-container fluid>
     <v-card outlined class="mb-4">
-      <v-card-title>监测站列表</v-card-title>
+      <v-card-title>Station List</v-card-title>
       <v-card-text>
-        <!-- 搜索框 -->
-        <v-text-field v-model="searchTerm" label="搜索（站点名称、城市、河流）" clearable></v-text-field>
-        <!-- 分组依据选择 -->
-        <v-select v-model="groupBy" :items="groupOptions" label="分组依据" @change="onGroupByChange"></v-select>
+        <!-- Search box -->
+        <v-text-field v-model="searchTerm" label="Search (Station Name, City, River)" clearable></v-text-field>
+        <!-- Grouping selection -->
+        <v-select v-model="groupBy" :items="groupOptions" label="Group By" @change="onGroupByChange"></v-select>
       </v-card-text>
       <v-divider></v-divider>
       <v-expansion-panels>
@@ -44,7 +44,7 @@ export default {
     return {
       stations: [],
       searchTerm: '',
-      groupBy: 'riverName', // 默认按河流名称分组
+      groupBy: 'riverName', // Default group by riverName
       groupOptions: ['riverName', 'town']
     };
   },
@@ -52,7 +52,7 @@ export default {
     this.fetchStations();
   },
   computed: {
-    // 根据搜索关键字过滤站点
+    // Filter stations by search keyword
     filteredStations() {
       if (!this.searchTerm) return this.stations;
       const term = this.searchTerm.toLowerCase();
@@ -62,11 +62,11 @@ export default {
         (station.riverName && station.riverName.toLowerCase().includes(term))
       );
     },
-    // 按 groupBy 字段分组
+    // Group stations by the groupBy field
     groupedStations() {
       const groups = {};
       this.filteredStations.forEach(station => {
-        const key = station[this.groupBy] || '其他';
+        const key = station[this.groupBy] || 'Other';
         if (!groups[key]) {
           groups[key] = [];
         }
@@ -96,6 +96,4 @@ export default {
 };
 </script>
 
-<style scoped>
-/* 根据需要调整样式 */
-</style>
+
