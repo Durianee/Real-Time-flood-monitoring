@@ -16,7 +16,7 @@ const app = createApp(App)
 app.use(router)
 app.use(vuetify)
 
-// 挂载 axios 为全局属性
+// mount axios as a global property
 import axios from 'axios'
 app.config.globalProperties.$axios = axios
 
