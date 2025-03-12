@@ -117,9 +117,6 @@ After installation, run both the backend and frontend services. The frontend com
 Backend: http://127.0.0.1:5000/
 Frontend: http://localhost:5173/
 
-### Contributing
-Contributions and improvements are welcome. Please fork the repository and create a pull request with your changes.
-
 ### License
-This project is licensed under the Open Government Licence v3.0.
+This uses Environment Agency flood and river level data from the real-time data API (Beta)
 
