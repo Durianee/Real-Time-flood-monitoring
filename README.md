@@ -46,7 +46,7 @@ This project is a Flood Monitoring System that retrieves and displays comprehens
 
 - **Backend**: Python 3.8+ (using a virtual environment is recommended)
 - **Frontend**: Node.js and npm
-- Git
+- **Git
 
 ### Backend Setup
 
